@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.OleDb;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RealEstateCrawler
+namespace LoupanCrawler
 {
     class DBHelper
     {
@@ -39,9 +34,22 @@ namespace RealEstateCrawler
             string description)
         {
             var cmd = new OleDbCommand(
-                $"INSERT INTO HistoryPrice(LoupanID,RecordDate,MaxPrice,AveragePrice,MinPrice,Description) VALUES('{loupanID}','{date}','{maxPrice}','{avgPrice}','{minPrice}','{description}')",
-                _conn);   
-            return cmd.ExecuteNonQuery();
+                $"INSERT INTO HistoryPrice(LoupanID,RecordDate,MaxPrice,AveragePrice,MinPrice,Description) VALUES('{loupanID}','{date}','{maxPrice}','{avgPrice}','{minPrice}','{description.Replace('\'', ' ')}')",
+                _conn);
+            try
+            {
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+            
+        }
+
+        public int InsertLoupanDetail()
+        {
+            return -1;
         }
 
         public void OpenConnection()

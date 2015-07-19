@@ -7,8 +7,8 @@
     <ProjectGuid>{F8BEF681-0E16-443F-91AA-2ECB6015B709}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RealEstateCrawler</RootNamespace>
-    <AssemblyName>RealEstateCrawler</AssemblyName>
+    <RootNamespace>LoupanCrawler</RootNamespace>
+    <AssemblyName>LoupanCrawler</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

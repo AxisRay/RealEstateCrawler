@@ -8,7 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealEstateCrawler
+namespace LoupanCrawler
 {
     class HttpHelper
     {

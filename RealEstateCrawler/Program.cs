@@ -13,7 +13,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
-namespace RealEstateCrawler
+namespace LoupanCrawler
 {
     static class Program
     {
@@ -45,22 +45,44 @@ namespace RealEstateCrawler
         static void Main(string[] args)
         {
             var helper = new DBHelper(DBPath);
-            //var citiesList =  GetCitiesList(RootUrl);
+            var citiesList =  GetCitiesList(RootUrl);
             helper.OpenConnection();
-            //foreach (var item in citiesList)
-            //{
-            //    if(item.Key=="西安")
-            //        CityLoupanSummary(item, helper);
-            //}
-            CatchLoupanPriceHistory("西安",helper);
+            foreach (var item in citiesList)
+            {
+                if (item.Key != "西安")
+                {//东莞
+                    CityLoupanSummary(item, helper);
+                    CatchLoupanPriceHistory(item.Key, helper);
+                }
+
+            }
+            //CatchLoupanPriceHistory("西安",helper);
+            //CatchLoupanDetail("西安", helper);
             helper.CloseConnection();
+        }
+
+        private static void CatchLoupanDetail(string city, DBHelper helper)
+        {
+            var reader = helper.GetLoupanSummaryReader(city);
+            while (reader.Read())
+            {
+                string url = reader["Url"].ToString();
+                string LoupanID = reader["ID"].ToString();
+                HtmlNode detailNode = LoupanDetailPage(url);
+            }
+            reader.Close();
+        }
+
+        private static void RecordLoupanDetail(string url,DBHelper helper)
+        {
+            
         }
 
         private static void CatchLoupanPriceHistory(string city,DBHelper helper)
         {
             var reader = helper.GetLoupanSummaryReader(city);
             while (reader.Read())
-            {
+            {   
                 string url = reader["Url"].ToString();
                 string LoupanID = reader["ID"].ToString();
                 HtmlNode detailNode = LoupanDetailPage(url);
@@ -77,12 +99,18 @@ namespace RealEstateCrawler
             var responseStream = request.GetResponseStream();
             var doc = GetHtmlDoc(responseStream);
             responseStream.Close();
-
-            var loupanDetailNode = doc
-                .OwnerDocument
-                .GetElementbyId("orginalNaviBox")
-                .SelectNodes("./a")[2];
-
+            HtmlNode loupanDetailNode;
+            try
+            {
+                loupanDetailNode = doc
+                    .OwnerDocument
+                    .GetElementbyId("orginalNaviBox")
+                    .SelectNodes("./a")[2];
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
             if (loupanDetailNode.InnerText != "楼盘详情")
                 return null;
 
@@ -99,7 +127,8 @@ namespace RealEstateCrawler
 
         private static void RecordHistoryPrice(string loupanID,HtmlNode loupanDetialNode,DBHelper helper)
         {
-
+            if (loupanDetialNode == null)
+                return;
             HtmlNodeCollection historyPriceList = loupanDetialNode
                 .OwnerDocument
                 .GetElementbyId("priceListOpen")
