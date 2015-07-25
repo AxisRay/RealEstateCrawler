@@ -16,73 +16,42 @@ namespace HouseCrawler
     class Program
     {
         private static string RootUrl = "http://newhouse.xian.fang.com/house/s/list/";//+"b810-b9{n}-c9y/";
-        private static string DBFilePath = @"C:\Users\Ray\Documents\realEstate.accdb";
         private static string City = "西安";
         static void Main(string[] args)
         {
+            HouseDBDataContext db = new HouseDBDataContext();
             ManualResetEvent eventX=new ManualResetEvent(false);
             ThreadPool.SetMaxThreads(10,10);
-            DBHelper helper =new DBHelper(DBFilePath);
             Crawler crawler = new Crawler(eventX);
-            helper.OpenConnection();
-            var reader = helper.GetLoupanSummaryReader(City);
-            while (reader.Read())
+
+            var loupanlist =
+                from loupan in db.LoupanSummary
+                where loupan.City == City
+                select new
+                {
+                    loupan.ID,
+                    loupan.Url
+                };
+
+            foreach (var loupan in loupanlist)
             {
                 HouseParser parser = new HouseParser(
-                    reader["ID"].ToString(),
-                    reader["Url"].ToString(), 
-                    City,
-                    helper);
+                    loupan.ID,
+                    loupan.Url, 
+                    City);
                 Crawler.iMaxCount++;
                 ThreadPool.QueueUserWorkItem(crawler.CrawlerStart, parser);
             }
-            reader.Close();
             Console.WriteLine("主线程等待中……");
             eventX.WaitOne(Timeout.Infinite, true);
             Console.WriteLine("任务完成！");
             Console.ReadLine();
         }
-
-        private static void RegexTest()
-        {
-            string test = "http://hanhuacheng.fang.com/2/house/3611048298/housedetail.htm";
-            Console.WriteLine(Regex.Match(test, @"((?<=/)|(?<=/))[\d]{10}"));
-        }
-
-        private static void testPost()
-        {
-            Random rand = new Random();
-            string url = "http://huazhoucheng.fang.com/house/ajaxrequest/dongList2015.php?t="+ rand.NextDouble();
-            Dictionary<string,string> parameters = new Dictionary<string, string>();
-            parameters.Add("newcode", "3611048298");
-            parameters.Add("pageindex", "1");
-            parameters.Add("ju", "");
-            parameters.Add("dong","");
-            parameters.Add("louc","");
-            parameters.Add("saling","");
-            parameters.Add("city","西安");
-            HttpWebResponse response = HttpHelper.CreatePostHttpResponse(url, parameters);
-            Stream responseStream = response.GetDecompressedStream();
-            StreamReader reader = new StreamReader(responseStream,Encoding.UTF8);
-            string responseStr = reader.ReadToEnd();
-
-            DBHelper helper = new DBHelper(DBFilePath);
-            helper.OpenConnection();
-
-            JObject responseJson = JObject.Parse(responseStr);
-            foreach (var house in responseJson["list"])
-            {
-                helper.InsertHouseDetail(house, "123123");
-            }
-        }
-
     }
 
     class Crawler
     {
         private ManualResetEvent _manualEvent;
-
-        private DBHelper _helper;
 
         private static int iCount;
         public static int iMaxCount = 0;

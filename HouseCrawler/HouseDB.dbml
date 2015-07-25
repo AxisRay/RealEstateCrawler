@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RealEstate" Class="HouseDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=RealEstate;Integrated Security=True" SettingsObjectName="HouseCrawler.Properties.Settings" SettingsPropertyName="RealEstateConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.LoupanSummary" Member="LoupanSummary">
+    <Type Name="LoupanSummary">
+      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LoupanName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HouseDetail" Member="HouseDetail">
+    <Type Name="HouseDetail">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="houseid" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dongid" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="newcode" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="projname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dongname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="room" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ting" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="wei" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="chu" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="jianzhumianji" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="houselocation" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="district" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="tehui_price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="price_s" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="price_s_type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="price_t" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="price_t_type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

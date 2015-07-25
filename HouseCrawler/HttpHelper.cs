@@ -73,7 +73,15 @@ namespace HouseCrawler
                     stream.Write(data, 0, data.Length);
                 }
             }
-            return request.GetResponse() as HttpWebResponse;
+            try
+            {
+                return request.GetResponse() as HttpWebResponse;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
 
         }
     }
