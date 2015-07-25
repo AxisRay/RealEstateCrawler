@@ -27,9 +27,9 @@ namespace LoupanCrawler
 
         public Stream GetResponseStream()
         {
-            _response = _request.GetResponse() as HttpWebResponse;
-            if (_response != null)
+            try
             {
+                _response = _request.GetResponse() as HttpWebResponse;
                 Stream myStream = _response.GetResponseStream();
                 if (_response.ContentEncoding.ToLower().Contains("gzip"))
                 {
@@ -38,7 +38,10 @@ namespace LoupanCrawler
                 }
                 return myStream;
             }
-            return Stream.Null;
+            catch (Exception)
+            {
+                return Stream.Null;
+            }
         }
     }
 }

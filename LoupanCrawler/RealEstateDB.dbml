@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RealEstate" Class="RealEstateDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=RealEstate;Integrated Security=True" SettingsObjectName="LoupanCrawler.Properties.Settings" SettingsPropertyName="RealEstateConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.HistoryPrice" Member="HistoryPrice">
+    <Type Name="HistoryPrice">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LoupanID" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="RecordDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MaxPrice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AveragePrice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinPrice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HouseDetail" Member="HouseDetail">
+    <Type Name="HouseDetail">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="houseid" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dongid" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="newcode" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="projname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dongname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="room" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ting" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="wei" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="chu" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="jianzhumianji" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="houselocation" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="district" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="tehui_price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="price_s" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="price_s_type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="price_t" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="price_t_type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoupanSummary" Member="LoupanSummary">
+    <Type Name="LoupanSummary">
+      <Column Name="ID" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LoupanName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_Insert_Loupan" Method="sp_Insert_Loupan">
+    <Parameter Name="ID" Parameter="iD" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="LoupanName" Parameter="loupanName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Price" Parameter="price" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Region" Parameter="region" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Url" Parameter="url" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="rtn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

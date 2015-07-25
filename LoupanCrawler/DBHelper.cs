@@ -15,10 +15,10 @@ namespace LoupanCrawler
             _cmd = new OleDbCommand {Connection = _conn};
         }
 
-        public int InsertLoupanSummary(string name,int price,string address,string region,string city,string url)
+        public int InsertLoupanSummary(string loupanid,string name,int price,string address,string region,string city,string url)
         {
             _cmd.CommandText =
-                $"INSERT INTO loupan(LoupanName, Price, Address,Region,City,Url)VALUES('{name}', {price}, '{address}','{region}','{city}','{url}')";
+                $"INSERT INTO loupan(ID,LoupanName, Price, Address,Region,City,Url)VALUES({loupanid},'{name}', {price}, '{address}','{region}','{city}','{url}')";
 
             return _cmd.ExecuteNonQuery();
         }
@@ -40,7 +40,7 @@ namespace LoupanCrawler
             {
                 return cmd.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return -1;
             }

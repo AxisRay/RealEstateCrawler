@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="RealEstateDB">
+  <DataContextMoniker Name="/RealEstateDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="61050d49-3989-427d-b811-d8b0f612a1d0" absoluteBounds="0.75, 0.75, 2, 2.0916874186197916">
+      <DataClassMoniker Name="/RealEstateDBDataContext/HistoryPrice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="60f176d3-1cb3-4f72-9ef1-6c701380dded" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.5316874186197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="03f538b2-6a83-4d1d-860f-71d7d2bc63f0" absoluteBounds="3.75, 0.75, 2, 4.3092167154947916">
+      <DataClassMoniker Name="/RealEstateDBDataContext/HouseDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e36e38a-078c-4c35-a293-3650a52ab9e9" absoluteBounds="3.765, 1.21, 1.9700000000000002, 3.749216715494792" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e4e908ae-9b00-488f-a682-7d9b496ddd23" absoluteBounds="6.75, 0.75, 2, 2.0916874186197916">
+      <DataClassMoniker Name="/RealEstateDBDataContext/LoupanSummary" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9d18f32-d4c5-44dd-aa5d-8260b05892f2" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.5316874186197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
