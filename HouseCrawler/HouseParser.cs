@@ -81,8 +81,7 @@ namespace HouseCrawler
                 Console.WriteLine("Error:{0},{1}", houseListJson["resCode"].Value<string>(), houseListJson["msg"].Value<string>());
                 return false;
             }
-                
-
+               
             CurrentPage = houseListJson["thispage"].Value<int>();
             TotalPage = houseListJson["totalpage"].Value<int>();
 
@@ -120,7 +119,8 @@ namespace HouseCrawler
                 price_s = PriceParse(house["price_s"].Value<string>()),
                 price_s_type = house["Price_s_type"].Value<string>(),
                 price_t = PriceParse(house["price_t"].Value<string>()),
-                price_t_type = house["Price_t_type"].Value<string>()
+                price_t_type = house["Price_t_type"].Value<string>(),
+                tehui_url = house["tehui_url"].Value<string>()
             };
             db.HouseDetail.InsertOnSubmit(hd);
 

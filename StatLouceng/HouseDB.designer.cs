@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HouseCrawler
+namespace StatLouceng
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -36,10 +36,13 @@ namespace HouseCrawler
     partial void InsertHouseDetail(HouseDetail instance);
     partial void UpdateHouseDetail(HouseDetail instance);
     partial void DeleteHouseDetail(HouseDetail instance);
+    partial void Insertlouceng(louceng instance);
+    partial void Updatelouceng(louceng instance);
+    partial void Deletelouceng(louceng instance);
     #endregion
 		
 		public HouseDBDataContext() : 
-				base(global::HouseCrawler.Properties.Settings.Default.RealEstateConnectionString1, mappingSource)
+				base(global::StatLouceng.Properties.Settings.Default.RealEstateConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -81,6 +84,14 @@ namespace HouseCrawler
 			get
 			{
 				return this.GetTable<HouseDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<louceng> louceng
+		{
+			get
+			{
+				return this.GetTable<louceng>();
 			}
 		}
 	}
@@ -784,6 +795,116 @@ namespace HouseCrawler
 					this._tehui_url = value;
 					this.SendPropertyChanged("tehui_url");
 					this.Ontehui_urlChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.louceng")]
+	public partial class louceng : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _dongid;
+		
+		private string _louceng1;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OndongidChanging(string value);
+    partial void OndongidChanged();
+    partial void Onlouceng1Changing(string value);
+    partial void Onlouceng1Changed();
+    #endregion
+		
+		public louceng()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dongid", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string dongid
+		{
+			get
+			{
+				return this._dongid;
+			}
+			set
+			{
+				if ((this._dongid != value))
+				{
+					this.OndongidChanging(value);
+					this.SendPropertyChanging();
+					this._dongid = value;
+					this.SendPropertyChanged("dongid");
+					this.OndongidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="louceng", Storage="_louceng1", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string louceng1
+		{
+			get
+			{
+				return this._louceng1;
+			}
+			set
+			{
+				if ((this._louceng1 != value))
+				{
+					this.Onlouceng1Changing(value);
+					this.SendPropertyChanging();
+					this._louceng1 = value;
+					this.SendPropertyChanged("louceng1");
+					this.Onlouceng1Changed();
 				}
 			}
 		}

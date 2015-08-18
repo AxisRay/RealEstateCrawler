@@ -20,10 +20,6 @@ namespace HouseCrawler
         static void Main(string[] args)
         {
             HouseDBDataContext db = new HouseDBDataContext();
-            ManualResetEvent eventX=new ManualResetEvent(false);
-            ThreadPool.SetMaxThreads(10,10);
-            Crawler crawler = new Crawler(eventX);
-
             var loupanlist =
                 from loupan in db.LoupanSummary
                 where loupan.City == City
@@ -33,8 +29,11 @@ namespace HouseCrawler
                     loupan.Url
                 };
 
+            ManualResetEvent eventX = new ManualResetEvent(false);
+            ThreadPool.SetMaxThreads(10, 10);
+            Crawler crawler = new Crawler(eventX);
             foreach (var loupan in loupanlist)
-            {
+            {                
                 HouseParser parser = new HouseParser(
                     loupan.ID,
                     loupan.Url, 
@@ -66,12 +65,13 @@ namespace HouseCrawler
             var parser = p as HouseParser;
             _manualEvent.Reset();
 
-            Console.WriteLine("URL:{0}",parser.LoupanUrl);
+            Console.WriteLine("URL:{0}", parser.LoupanUrl);
 
-            while(parser.RecordHouseDetail())
+            while (parser.RecordHouseDetail())
             {
-                Console.WriteLine("Page：{0}/{1}",parser.CurrentPage,parser.TotalPage);
+                Console.WriteLine("Page：{0}/{1}", parser.CurrentPage, parser.TotalPage);
             }
+
 
             Interlocked.Increment(ref iCount);
             if (iCount == iMaxCount)

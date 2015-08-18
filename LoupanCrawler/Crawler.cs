@@ -155,7 +155,7 @@ namespace LoupanCrawler
         }
 
         /// <summary>
-        /// 扩展方法：从字符串总提取价格
+        /// 从字符串总提取价格
         /// </summary>
         /// <param name="priceStr">含有价格的字符串</param>
         /// <returns></returns>
@@ -340,7 +340,7 @@ namespace LoupanCrawler
         }
 
         /// <summary>
-        /// 获取楼盘区域
+        /// 获取楼盘所在地区
         /// </summary>
         /// <param name="loupanNode">楼盘节点</param>
         /// <returns></returns>
